@@ -8,15 +8,23 @@ use Prophecy\Argument;
 use Germania\PermanentAuth\Exceptions\DuplicateSelectorException;
 use Germania\PermanentAuth\Exceptions\StorageException;
 
-class PdoStorageTest extends \PHPUnit_Framework_TestCase
+class PdoStorageTest extends DatabaseTestCaseAbstract
 {
 
     public $logger;
 
     public function setUp()
     {
+        parent::setUp();
         $this->logger = new NullLogger;
     }
+
+    public function getDataSet()
+    {
+        return $this->createMySQLXMLDataSet(__DIR__ . '/../auth_logins-dataset.xml');
+    }
+
+
 
     /**
      * @dataProvider provideData
@@ -36,13 +44,12 @@ class PdoStorageTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf( \PDOStatement::class, $sut->insert_stmt );
     }
 
-    /**
-     * @dataProvider provideDuplicateSelectorData
-     */
-    public function testDuplicateSelectorException( $avoid_result, $insert_result )
+
+
+    public function testDuplicateSelectorException( )
     {
         $insert_stmt = $this->prophesize(\PDOStatement::class);
-        $insert_stmt->execute( Argument::type('array') )->willReturn( $insert_result );
+        $insert_stmt->execute( Argument::type('array') )->willReturn( true );
         $insert_stmt_mock = $insert_stmt->reveal();
 
         $pdo_mock  = $this->createPdoMock( $insert_stmt_mock );
@@ -61,13 +68,11 @@ class PdoStorageTest extends \PHPUnit_Framework_TestCase
         $sut( 99, "selector", "token_hash", new \DateTime);
 
     }
-    /**
-     * @dataProvider provideDuplicateSelectorData
-     */
-    public function testErrorOnAvoidStatementExecution( $avoid_result, $insert_result )
+
+    public function testErrorOnAvoidStatementExecution( )
     {
         $insert_stmt = $this->prophesize(\PDOStatement::class);
-        $insert_stmt->execute( Argument::type('array') )->willReturn( $insert_result );
+        $insert_stmt->execute( Argument::type('array') )->willReturn( true );
         $insert_stmt_mock = $insert_stmt->reveal();
 
         $pdo_mock  = $this->createPdoMock( $insert_stmt_mock );
@@ -137,6 +142,32 @@ class PdoStorageTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testMysqlFailedInsertion(  )
+    {
+        $pdo = $this->getPdo();
+
+        // Find some existing selector
+        $find_stmt = $pdo->prepare("SELECT selector FROM auth_logins WHERE 1 LIMIT 1");
+        $find_stmt->execute();
+        $existing_selector = $find_stmt->fetchColumn();
+
+        $sut = new PdoStorage( $pdo, $this->logger);
+
+        $this->expectException( StorageException::class );
+        $result = $sut( 99, $existing_selector, "token_hash", new \DateTime);
+    }
+
+    public function testMysqlInsertion(  )
+    {
+        $pdo = $this->getPdo();
+
+        $sut = new PdoStorage( $pdo, $this->logger);
+
+        $result = $sut( 99, "selector", "token_hash", new \DateTime);
+        $this->assertTrue( $result );
+    }
+
+
 
     protected function createPdoMock( $stmt )
     {
@@ -154,11 +185,5 @@ class PdoStorageTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function provideDuplicateSelectorData()
-    {
-        return array(
-            [ true,  true ],
-            [ false, true ]
-        );
-    }
+
 }

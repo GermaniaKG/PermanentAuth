@@ -9,18 +9,17 @@ use Prophecy\Argument;
 class PdoDeleteTest extends DatabaseTestCaseAbstract  #\PHPUnit_Framework_TestCase
 {
 
-    public function getDataSet()
-    {
-        # return $this->createMySQLXMLDataSet(__DIR__ . '/../sql/auth_logins.sql');
-        return $this->createMySQLXMLDataSet('tests/auth_logins-dataset.xml');
-        return $this->createFlatXmlDataSet(__DIR__ . '/auth_logins-dataset.xml');
-    }
-
     public $logger;
 
     public function setUp()
     {
+        parent::setUp();
         $this->logger = new NullLogger;
+    }
+
+    public function getDataSet()
+    {
+        return $this->createMySQLXMLDataSet(__DIR__ . '/../auth_logins-dataset.xml');
     }
 
     /**
@@ -28,7 +27,6 @@ class PdoDeleteTest extends DatabaseTestCaseAbstract  #\PHPUnit_Framework_TestCa
      */
     public function testInstantiation( $user_id, $execution_result, $row_count )
     {
-        return;
         $stmt = $this->prophesize(\PDOStatement::class);
         $stmt->execute( Argument::type('array') )->willReturn( $execution_result );
         $stmt->rowCount( )->willReturn( $row_count );
@@ -49,7 +47,6 @@ class PdoDeleteTest extends DatabaseTestCaseAbstract  #\PHPUnit_Framework_TestCa
     {
         $pdo = $this->getPdo();
 
-
         $sut = new PdoDelete( $pdo, $this->logger);
         $this->assertEquals( $row_count, $sut($user_id) );
     }
@@ -58,8 +55,11 @@ class PdoDeleteTest extends DatabaseTestCaseAbstract  #\PHPUnit_Framework_TestCa
     public function provideData()
     {
         return array(
+            // This entry exists
             [ 1, true,  1 ],
+            // and this does not.
             [ 3, false, 0 ]
         );
     }
+
 }
