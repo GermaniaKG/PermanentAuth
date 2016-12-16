@@ -6,8 +6,15 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Prophecy\Argument;
 
-class PdoDeleteTest extends \PHPUnit_Framework_TestCase
+class PdoDeleteTest extends DatabaseTestCaseAbstract  #\PHPUnit_Framework_TestCase
 {
+
+    public function getDataSet()
+    {
+        # return $this->createMySQLXMLDataSet(__DIR__ . '/../sql/auth_logins.sql');
+        return $this->createMySQLXMLDataSet('tests/auth_logins-dataset.xml');
+        return $this->createFlatXmlDataSet(__DIR__ . '/auth_logins-dataset.xml');
+    }
 
     public $logger;
 
@@ -21,6 +28,7 @@ class PdoDeleteTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstantiation( $user_id, $execution_result, $row_count )
     {
+        return;
         $stmt = $this->prophesize(\PDOStatement::class);
         $stmt->execute( Argument::type('array') )->willReturn( $execution_result );
         $stmt->rowCount( )->willReturn( $row_count );
@@ -34,11 +42,24 @@ class PdoDeleteTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * @dataProvider provideData
+     */
+    public function testMySQLTable( $user_id, $execution_result, $row_count )
+    {
+        $pdo = $this->getPdo();
+
+
+        $sut = new PdoDelete( $pdo, $this->logger);
+        $this->assertEquals( $row_count, $sut($user_id) );
+    }
+
+
     public function provideData()
     {
         return array(
             [ 1, true,  1 ],
-            [ 2, false, 0 ]
+            [ 3, false, 0 ]
         );
     }
 }
