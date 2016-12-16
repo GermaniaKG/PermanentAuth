@@ -202,7 +202,7 @@ use Germania\PermanentAuth\PdoDelete;
 ##Development and Testing
 
 Develop using `develop` branch, using [Git Flow](https://github.com/nvie/gitflow).   
-Go to proejct root and issue `phpunit`.
+Go to project root and issue `phpunit`.
 
 ```bash
 $ git clone git@github.com:GermaniaKG/PermanentAuth.git permanent-authentication
