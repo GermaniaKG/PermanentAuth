@@ -20,6 +20,13 @@
 		</whitelist>
 	</filter>
 
+	<php>
+		<var name="DB_DSN"    value="mysql:host=localhost;dbname=DBNAME;charset=utf8" />
+		<var name="DB_USER"   value="DBUSER" />
+		<var name="DB_PASSWD" value="DBPASS" />
+		<var name="DB_DBNAME" value="DBNAME" />
+	</php>
+
 	<logging>
 		<log type="coverage-clover" target="build/logs/clover.xml"/>
 		<log type="coverage-html"   target="build/logs/html/"/>
