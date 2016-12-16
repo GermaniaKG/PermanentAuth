@@ -1,5 +1,12 @@
-<?xml version="1.0" ?>
-<mysqldump>
-    <auth_logins id="1" user_id="1" selector="foo" />
-    <auth_logins id="2" user_id="2" selector="bar" />
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="PHPUNIT">
+	<table_data name="auth_logins">
+		<row>
+			<field name="id">1</field>
+			<field name="user_id">1</field>
+			<field name="selector">foobar</field>
+		</row>
+	</table_data>
+</database>
 </mysqldump>
