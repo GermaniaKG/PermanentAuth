@@ -5,6 +5,12 @@ php:
   - "7.1"
   - hhvm
 
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+
 env:
 
 before_script:
