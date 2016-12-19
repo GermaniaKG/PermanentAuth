@@ -2,6 +2,11 @@
 
 **This package was destilled from legacy code!**   
 
+[![Build Status](https://travis-ci.org/GermaniaKG/PermenentAuth.svg?branch=master)](https://travis-ci.org/GermaniaKG/PermenentAuth?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/?branch=master)
+
+
 ##Requirements
 
 - Anthony Ferrara's [ircmaxell/RandomLib](https://github.com/ircmaxell/RandomLib)
