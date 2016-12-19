@@ -2,6 +2,11 @@
 
 **This package was destilled from legacy code!**   
 
+[![Build Status](https://travis-ci.org/GermaniaKG/PermenentAuth.svg?branch=master)](https://travis-ci.org/GermaniaKG/PermenentAuth?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermenentAuth/?branch=master)
+
+
 ##Requirements
 
 - Anthony Ferrara's [ircmaxell/RandomLib](https://github.com/ircmaxell/RandomLib)
@@ -201,12 +206,30 @@ use Germania\PermanentAuth\PdoDelete;
 
 ##Development and Testing
 
-Develop using `develop` branch, using [Git Flow](https://github.com/nvie/gitflow).   
-Go to proejct root and issue `phpunit`.
+First, grab our clone:
 
 ```bash
 $ git clone git@github.com:GermaniaKG/PermanentAuth.git permanent-authentication
 $ cd permanent-authentication
+$ composer install
 $ cp phpunit.xml.dist phpunit.xml
-$ phpunit
 ```
+
+Develop using `develop` branch, using [Git Flow](https://github.com/nvie/gitflow).   
+
+Setup a MySQL table `auth_logins` as in `sql/auth_logins.sql.txt`. 
+
+In `phpunit.xml`, edit the database credentials:
+
+```xml
+<php>
+	<var name="DB_DSN"    value="mysql:host=localhost;dbname=DBNAME;charset=utf8" />
+	<var name="DB_USER"   value="DBUSER" />
+	<var name="DB_PASSWD" value="DBPASS" />
+	<var name="DB_DBNAME" value="DBNAME" />
+</php>
+```
+
+
+Go to project root and issue `phpunit`.
+
