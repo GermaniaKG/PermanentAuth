@@ -20,7 +20,7 @@ use RandomLib\Generator;
 class CreatePersistentLogin
 {
     /**
-     * @var Generator
+     * @var \RandomLib\Generator
      */
     public $generator;
 
@@ -40,7 +40,7 @@ class CreatePersistentLogin
     public $store_on_server;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     public $valid_until;
 
