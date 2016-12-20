@@ -8,7 +8,7 @@ use Prophecy\Argument;
 use Germania\PermanentAuth\Exceptions\DuplicateSelectorException;
 use Germania\PermanentAuth\Exceptions\StorageException;
 
-class PdoStorageTest extends DatabaseTestCaseAbstract
+class PdoStorageTest extends \PHPUnit_Framework_TestCase
 {
 
     public $logger;
@@ -139,32 +139,6 @@ class PdoStorageTest extends DatabaseTestCaseAbstract
 
         $this->expectException( StorageException::class );
         $result = $sut( 99, "selector", "token_hash", new \DateTime);
-    }
-
-
-    public function testMysqlFailedInsertion(  )
-    {
-        $pdo = $this->getPdo();
-
-        // Find some existing selector
-        $find_stmt = $pdo->prepare("SELECT selector FROM auth_logins WHERE 1 LIMIT 1");
-        $find_stmt->execute();
-        $existing_selector = $find_stmt->fetchColumn();
-
-        $sut = new PdoStorage( $pdo, $this->logger);
-
-        $this->expectException( StorageException::class );
-        $result = $sut( 99, $existing_selector, "token_hash", new \DateTime);
-    }
-
-    public function testMysqlInsertion(  )
-    {
-        $pdo = $this->getPdo();
-
-        $sut = new PdoStorage( $pdo, $this->logger);
-
-        $result = $sut( 99, "selector", "token_hash", new \DateTime);
-        $this->assertTrue( $result );
     }
 
 

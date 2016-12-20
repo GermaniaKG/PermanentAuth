@@ -10,13 +10,14 @@ build:
                 coverage:
                     file: 'some-file'
                     format: 'clover'
-checks:
-    php:
-        code_rating: true
-        duplication: true
 
 filter:
     excluded_paths:
         - tests/*
+
+checks:
+    php:
+        code_rating: true
+        duplication: true
 
 

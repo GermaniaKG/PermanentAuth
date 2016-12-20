@@ -1,5 +1,5 @@
 <?php
-namespace tests;
+namespace mysql;
 
 use Germania\PermanentAuth\PdoDelete;
 use Psr\Log\LoggerInterface;
@@ -17,27 +17,6 @@ class PdoDeleteTest extends DatabaseTestCaseAbstract  #\PHPUnit_Framework_TestCa
         $this->logger = new NullLogger;
     }
 
-    public function getDataSet()
-    {
-        return $this->createMySQLXMLDataSet(__DIR__ . '/../auth_logins-dataset.xml');
-    }
-
-    /**
-     * @dataProvider provideData
-     */
-    public function testInstantiation( $user_id, $execution_result, $row_count )
-    {
-        $stmt = $this->prophesize(\PDOStatement::class);
-        $stmt->execute( Argument::type('array') )->willReturn( $execution_result );
-        $stmt->rowCount( )->willReturn( $row_count );
-        $stmt_mock = $stmt->reveal();
-
-        $pdo = $this->prophesize(\PDO::class);
-        $pdo->prepare( Argument::type('string') )->willReturn( $stmt_mock );
-
-        $sut = new PdoDelete( $pdo->reveal(), $this->logger);
-        $this->assertEquals( $row_count, $sut($user_id) );
-    }
 
 
     /**

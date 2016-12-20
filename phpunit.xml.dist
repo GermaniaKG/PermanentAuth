@@ -9,9 +9,14 @@
 
 
 	<testsuites>
-		<testsuite name="Test Suite">
-			<directory>tests/src</directory>
+		<testsuite name="default">
+			<directory>tests/default</directory>
 		</testsuite>
+		<!--
+		<testsuite name="mysql">
+			<directory>tests/mysql</directory>
+		</testsuite>
+		-->
 	</testsuites>
 
 	<filter>
