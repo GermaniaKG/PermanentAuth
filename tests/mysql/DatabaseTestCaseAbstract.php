@@ -1,5 +1,5 @@
 <?php
-namespace tests;
+namespace mysql;
 
 
 abstract class DatabaseTestCaseAbstract extends \PHPUnit_Extensions_Database_TestCase
@@ -11,6 +11,11 @@ abstract class DatabaseTestCaseAbstract extends \PHPUnit_Extensions_Database_Tes
     // only instantiate PHPUnit_Extensions_Database_DB_IDatabaseConnection once per test
     protected $conn = null;
 
+
+    public function getDataSet()
+    {
+        return $this->createMySQLXMLDataSet(__DIR__ . '/../auth_logins-dataset.xml');
+    }
 
 
     /**
