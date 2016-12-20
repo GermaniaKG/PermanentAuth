@@ -21,6 +21,12 @@ abstract class DatabaseTestCaseAbstract extends \PHPUnit_Extensions_Database_Tes
         if ($this->conn === null) {
             if (static::$pdo == null) {
                 static::$pdo = new \PDO( $GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'] );
+
+                if ($db_setup = implode(\DIRECTORY_SEPARATOR, [ getcwd(), $GLOBALS['DB_SETUP']])
+                and is_readable( $db_setup) ) {
+                    static::$pdo->query( file_get_contents( $db_setup ));
+                }
+
             }
             $this->conn = $this->createDefaultDBConnection(static::$pdo, $GLOBALS['DB_DBNAME']);
 
