@@ -1,16 +1,18 @@
-#Germania\PermanentAuth
+# Germania\PermanentAuth
 
 **This package was destilled from legacy code!**   
 
 [![Build Status](https://travis-ci.org/GermaniaKG/PermanentAuth.svg?branch=master)](https://travis-ci.org/GermaniaKG/PermanentAuth)
 [![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/build-status/master)
 
-##Requirements
+
+## Requirements
 
 - Anthony Ferrara's [ircmaxell/RandomLib](https://github.com/ircmaxell/RandomLib)
 
-##Installation
+## Installation
 
 ```bash
 $ composer require germania-kg/permanent-authentication
@@ -20,12 +22,12 @@ $ composer require germania-kg/permanent-authentication
 
 
 
-##Create a persistent login
+## Create a persistent login
 
 This Callable stores a selector and token pair in a cookie on the client side
 and stores the selected and hashed token in the database. Five ingredients are required:
 
-**rnd:** An instance of [RandomLib](https://github.com/ircmaxell/RandomLib) Generator for creating secure random numbers and strings. 
+**rnd:** An instance of [RandomLib](https://github.com/ircmaxell/RandomLib) Generator for creating secure random numbers and strings.
 
 **client_storage:** A Callable that stores the selector and token pair on the client-side. On error, it should throw an Exception implementing *Germania\PermanentAuth\Exceptions\StorageExceptionInterface.*  – Create your own or try the implementation described in [ClientStorage](#ClientStorage) section below
 
@@ -77,7 +79,7 @@ endif;
 
 
 
-##Authenticate a user with permanent login
+## Authenticate a user with permanent login
 
 This Callable tries to retrieve and return a persistent login selector and token. *It does not validate the user!* — In other words, it tells you who the re-visiting user claims to be.
 
@@ -86,7 +88,7 @@ This Callable tries to retrieve and return a persistent login selector and token
 <?php
 use Germania\PermanentAuth\ClientAuthentication;
 
-// Setup: 
+// Setup:
 // 1. Retrieve the cookie value
 $cookie_getter = function( $cookie_name ) {
 	// return $_COOKIE[ $name ]
@@ -111,12 +113,12 @@ $selector_token = $auth();
 if ($selector_token):
 	// Check if selector and token are valid on server-side
 endif;
-	
+
 ```
 
-##Helpers
+## Helpers
 
-###AuthUserInterface
+### AuthUserInterface
 
 Defines interceptors for the User ID. Required by **PermanentAuth\Middleware** which expects a user object-
 
@@ -126,8 +128,8 @@ use Germania\PermanentAuth\AuthUserInterface;
 
 class AppUser implements AuthUserInterface
 {
-	public $id; 
-	
+	public $id;
+
     /**
      * Returns the User ID.
      * @return mixed
@@ -148,8 +150,8 @@ class AppUser implements AuthUserInterface
 ```
 
 
-###Middleware
-Tthis PSR-style Middelware identifies a user and validates the claimed login selector against database. On success, assign found User ID to user object.
+### Middleware
+This PSR-style Middleware identifies a user and validates the claimed login selector against database. On success, assign found User ID to user object.
 
 Requires a **PermanentAuth\AuthUserInterface** instance.
 
@@ -167,10 +169,10 @@ $app->add( $middleware );
 
 ```
 
-###ClientStorage
+### ClientStorage
 
 Store selector and token on the client-side.
-Random-generated selector and token are base64-encoded and sent to the Client as cookie, together with expiration date. 
+Random-generated selector and token are base64-encoded and sent to the Client as cookie, together with expiration date.
 
 
 ```php
@@ -178,15 +180,15 @@ Random-generated selector and token are base64-encoded and sent to the Client as
 use Germania\PermanentAuth\ClientStorage;
 ```
 
-###PdoStorage
-Store selector and token hash in the database, together with expiration date. 
+### PdoStorage
+Store selector and token hash in the database, together with expiration date.
 
 ```php
 <?php
 use Germania\PermanentAuth\PdoStorage;
 ```
 
-###PdoValidator
+### PdoValidator
 Validate a login selector and token against token hash in the database.
 
 ```php
@@ -194,7 +196,7 @@ Validate a login selector and token against token hash in the database.
 use Germania\PermanentAuth\PdoValidator;
 ```
 
-###PdoDelete
+### PdoDelete
 
 Remove all permanent logins for a given user.
 
@@ -203,21 +205,19 @@ Remove all permanent logins for a given user.
 use Germania\PermanentAuth\PdoDelete;
 ```
 
-##Development and Testing
-
-First, grab our clone:
+## Development
 
 ```bash
 $ git clone git@github.com:GermaniaKG/PermanentAuth.git permanent-authentication
 $ cd permanent-authentication
 $ composer install
-$ cp phpunit.xml.dist phpunit.xml
 ```
 
-Develop using `develop` branch, using [Git Flow](https://github.com/nvie/gitflow).   
+## Unit tests
 
-Setup a MySQL table `auth_logins` as in `sql/auth_logins.sql.txt`. 
+Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is.
 
+Setup a MySQL table `auth_logins` as in `sql/auth_logins.sql.txt`.
 In `phpunit.xml`, edit the database credentials:
 
 ```xml
@@ -229,6 +229,8 @@ In `phpunit.xml`, edit the database credentials:
 </php>
 ```
 
+After all, run [PhpUnit](https://phpunit.de/) like this:
 
-Go to project root and issue `phpunit`.
-
+```bash
+$ vendor/bin/phpunit
+```
