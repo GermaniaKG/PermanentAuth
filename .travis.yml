@@ -19,7 +19,7 @@ before_script:
   - cp phpunit.xml.dist phpunit.xml
 
 script:
-  - phpunit
+  - vendor/bin/phpunit
 
 after_script:
 
