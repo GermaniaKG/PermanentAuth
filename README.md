@@ -203,21 +203,19 @@ Remove all permanent logins for a given user.
 use Germania\PermanentAuth\PdoDelete;
 ```
 
-## Development and Testing
-
-First, grab our clone:
+## Development
 
 ```bash
 $ git clone git@github.com:GermaniaKG/PermanentAuth.git permanent-authentication
 $ cd permanent-authentication
 $ composer install
-$ cp phpunit.xml.dist phpunit.xml
 ```
 
-Develop using `develop` branch, using [Git Flow](https://github.com/nvie/gitflow).   
+## Unit tests
+
+Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is.
 
 Setup a MySQL table `auth_logins` as in `sql/auth_logins.sql.txt`.
-
 In `phpunit.xml`, edit the database credentials:
 
 ```xml
@@ -229,5 +227,8 @@ In `phpunit.xml`, edit the database credentials:
 </php>
 ```
 
+After all, run [PhpUnit](https://phpunit.de/) like this:
 
-Go to project root and issue `phpunit`.
+```bash
+$ vendor/bin/phpunit
+```
