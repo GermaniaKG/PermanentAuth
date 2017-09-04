@@ -1,4 +1,4 @@
-# Germania\PermanentAuth
+# Germania KG · PermanentAuth
 
 **This package was destilled from legacy code!**   
 
