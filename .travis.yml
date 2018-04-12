@@ -5,7 +5,14 @@ php:
   # - "7.0"
   - "7.1"
   - "7.2"
-  - hhvm
+
+  # Disable hhvm right now, as Prophecy on hhvm has issues:
+  #
+  #     Prophecy\Exception\Doubler\ClassCreatorException: Could not double `PDOStatement` and implement interfaces:
+  #
+  # hhvm is not needed anyway.
+
+  # - hhvm
 
 services:
   - mysql
