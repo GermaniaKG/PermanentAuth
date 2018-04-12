@@ -33,7 +33,7 @@
 	},
 
 	"require-dev": {
-			"satooshi/php-coveralls": "^1.0",
+			"php-coveralls/php-coveralls": "^2.0",
 			"phpunit/phpunit": "^5.7|^6.0",
 			"phpunit/dbunit": "^2.0"
 	}
