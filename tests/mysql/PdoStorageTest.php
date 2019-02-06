@@ -13,7 +13,7 @@ class PdoStorageTest extends DatabaseTestCaseAbstract
 
     public $logger;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->logger = new NullLogger;

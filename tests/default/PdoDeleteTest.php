@@ -6,7 +6,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Prophecy\Argument;
 
-class PdoDeleteTest extends \PHPUnit_Framework_TestCase
+class PdoDeleteTest extends \PHPUnit\Framework\TestCase
 {
 
     public $logger;

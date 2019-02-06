@@ -2,17 +2,21 @@
 
 **This package was destilled from legacy code!**   
 
-[![Build Status](https://travis-ci.org/GermaniaKG/PermanentAuth.svg?branch=master)](https://travis-ci.org/GermaniaKG/PermanentAuth)
-[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/?branch=master)
+[![Packagist](https://img.shields.io/packagist/v/germania-kg/permanent-authentication.svg?style=flat)](https://packagist.org/packages/germania-kg/permanent-authentication)
+[![PHP version](https://img.shields.io/packagist/php-v/germania-kg/permanent-authentication.svg)](https://packagist.org/packages/germania-kg/permanent-authentication)
+[![Build Status](https://img.shields.io/travis/GermaniaKG/PermanentAuth.svg?label=Travis%20CI)](https://travis-ci.org/GermaniaKG/PermanentAuth)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GermaniaKG/PermanentAuth/build-status/master)
+
+
 
 
 ## Requirements
 
 - Anthony Ferrara's [ircmaxell/RandomLib](https://github.com/ircmaxell/RandomLib)
 
-## Installation
+## Installation with Composer
 
 ```bash
 $ composer require germania-kg/permanent-authentication
@@ -208,14 +212,20 @@ use Germania\PermanentAuth\PdoDelete;
 ## Development
 
 ```bash
-$ git clone git@github.com:GermaniaKG/PermanentAuth.git permanent-authentication
-$ cd permanent-authentication
+$ git clone https://github.com/GermaniaKG/PermanentAuth.git
+$ cd PermanentAuth
 $ composer install
 ```
 
 ## Unit tests
 
-Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is.
+Either copy `phpunit.xml.dist` to `phpunit.xml` and adapt to your needs, or leave as is. Run [PhpUnit](https://phpunit.de/) test or composer scripts like this:
+
+```bash
+$ composer test
+# or
+$ vendor/bin/phpunit
+```
 
 Setup a MySQL table `auth_logins` as in `sql/auth_logins.sql.txt`.
 In `phpunit.xml`, edit the database credentials:
@@ -229,8 +239,3 @@ In `phpunit.xml`, edit the database credentials:
 </php>
 ```
 
-After all, run [PhpUnit](https://phpunit.de/) like this:
-
-```bash
-$ vendor/bin/phpunit
-```

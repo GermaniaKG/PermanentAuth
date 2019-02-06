@@ -10,7 +10,7 @@ use Prophecy\Argument;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-class MiddlewareTest extends \PHPUnit_Framework_TestCase
+class MiddlewareTest extends \PHPUnit\Framework\TestCase
 {
 
     public $logger;
