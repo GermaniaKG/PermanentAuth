@@ -8,7 +8,7 @@ use RandomLib\Generator;
 use Psr\Log\NullLogger;
 use Prophecy\Argument;
 
-class CreatePersistentLoginTest extends \PHPUnit_Framework_TestCase
+class CreatePersistentLoginTest extends \PHPUnit\Framework\TestCase
 {
 
     public $logger;

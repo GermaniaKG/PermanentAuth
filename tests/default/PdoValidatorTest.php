@@ -7,7 +7,7 @@ use Psr\Log\NullLogger;
 use Prophecy\Argument;
 
 
-class PdoValidatorTest extends \PHPUnit_Framework_TestCase
+class PdoValidatorTest extends \PHPUnit\Framework\TestCase
 {
 
     public $logger;

@@ -11,7 +11,7 @@ class PdoDeleteTest extends DatabaseTestCaseAbstract  #\PHPUnit_Framework_TestCa
 
     public $logger;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->logger = new NullLogger;

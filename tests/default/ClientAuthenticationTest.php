@@ -4,7 +4,7 @@ namespace tests;
 use Germania\PermanentAuth\ClientAuthentication;
 use Psr\Log\NullLogger;
 
-class ClientAuthenticationTest extends \PHPUnit_Framework_TestCase
+class ClientAuthenticationTest extends \PHPUnit\Framework\TestCase
 {
 
     public function setUp()

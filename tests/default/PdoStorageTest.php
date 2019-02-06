@@ -8,7 +8,7 @@ use Prophecy\Argument;
 use Germania\PermanentAuth\Exceptions\DuplicateSelectorException;
 use Germania\PermanentAuth\Exceptions\StorageException;
 
-class PdoStorageTest extends \PHPUnit_Framework_TestCase
+class PdoStorageTest extends \PHPUnit\Framework\TestCase
 {
 
     public $logger;

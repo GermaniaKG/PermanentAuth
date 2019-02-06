@@ -4,7 +4,7 @@ namespace tests;
 use Germania\PermanentAuth\ClientStorage;
 use Germania\PermanentAuth\Exceptions\StorageException;
 
-class ClientStorageTest extends \PHPUnit_Framework_TestCase
+class ClientStorageTest extends \PHPUnit\Framework\TestCase
 {
 
 
